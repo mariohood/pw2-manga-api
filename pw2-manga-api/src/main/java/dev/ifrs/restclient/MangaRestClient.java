@@ -9,14 +9,14 @@ import javax.ws.rs.core.MediaType;
 
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 
-import dev.ifrs.restclient.model.Manga;
+import dev.ifrs.restclient.model.Response;
 
 @RegisterRestClient(configKey = "restclient-api")
 @Produces(MediaType.APPLICATION_JSON)
-public interface RestClient {
+public interface MangaRestClient {
     @GET
-    @Path("/auto-complete")
-    Manga search (@HeaderParam("x-rapidapi-key") String xRapidapiKey,
+    @Path("/search/manga")
+    Response search(@HeaderParam("x-rapidapi-key") String xRapidapiKey,
     @HeaderParam("x-rapidapi-host") String xRapidapiHost,
     @QueryParam("q") String query);
 }
