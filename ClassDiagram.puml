@@ -1,0 +1,32 @@
+@startuml
+class Pessoa {
+    long id
+    String name
+    String password
+    String e-mail
+
+    getters()
+    setters()
+}
+
+class Auth {
+
+    autenticacao()
+}
+
+class Anuncio {
+    manga
+    avaliacao
+    List Mensagens
+    getters() 
+}
+
+class Manga {
+    nome
+    volume
+    autor;
+    editora;
+}
+
+Manga --> Anuncio : "* . 1" 
+@enduml
