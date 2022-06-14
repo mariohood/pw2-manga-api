@@ -1,8 +1,10 @@
 package dev.ifrs.restclient.model;
 
+import java.util.List;
+
 public class Response {
     private String request_hash;
-    //private Result results;
+    private List <Result> results;
     
     public String getRequest_hash() {
         return request_hash;
@@ -10,10 +12,11 @@ public class Response {
     public void setRequest_hash(String request_hash) {
         this.request_hash = request_hash;
     }
-  //  public Result getResults() {
-  //      return results;
- //   }
- //   public void setResults(Result results) {
-  //      this.results = results;
-  //  }
+    public List<Result> getResults() {
+        return results;
+    }
+    public void setResults(List<Result> results) {
+        this.results = results;
+    }
+    
 }
