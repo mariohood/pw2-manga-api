@@ -2,7 +2,9 @@ package dev.ifrs;
 
 import java.util.List;
 
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -11,10 +13,10 @@ import javax.ws.rs.core.MediaType;
 @Path("/p")
 public class WService {
     
-    @GET
-    @Path("/create/{login}/{password}/{email}")
+    @POST
+    @Path("/create")
     @Produces(MediaType.APPLICATION_JSON)
-    public Pessoa pessoa(@PathParam("login") String login, @PathParam("password") String password, @PathParam("email") String email){
+    public Pessoa pessoa(@FormParam("login") String login, @FormParam("password") String password, @FormParam("email") String email){
         Pessoa pessoa = new Pessoa(login, password, email);
         System.out.println(pessoa.getLogin());
         return pessoa;
