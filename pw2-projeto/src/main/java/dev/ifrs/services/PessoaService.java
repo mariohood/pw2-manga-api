@@ -1,17 +1,16 @@
-package dev.ifrs;
+package dev.ifrs.services;
 
 import java.util.List;
-
+import dev.ifrs.*;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-@Path("/p")
-public class WService {
+@Path("/pessoa")
+public class PessoaService {
     
     @POST
     @Path("/create")
