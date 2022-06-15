@@ -1,5 +1,6 @@
 package dev.ifrs;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Anuncio {
@@ -10,6 +11,13 @@ public class Anuncio {
     private String estrelas;
     private String status;
     
+    
+
+    public Anuncio(Pessoa pessoa, Manga manga) {
+        this.pessoa = pessoa;
+        this.manga = manga;
+        this.status = "Válido";
+    }
     public Pessoa getPessoa() {
         return pessoa;
     }
@@ -41,4 +49,11 @@ public class Anuncio {
         this.status = status;
     }
     
+
+    public static List<Anuncio> listAll() {
+        List<Anuncio> list = new ArrayList<>();
+        list.add(new Anuncio(new Pessoa("1pessoa_Anuncio"), new Manga(1234L)));
+        list.add(new Anuncio(new Pessoa("2pessoa_Anuncio"), new Manga(1234L)));        
+        return list;
+    }
 }

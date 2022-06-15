@@ -14,6 +14,9 @@ public class Pessoa {
 
 
     
+    public Pessoa(String login) {
+        this.login = login;
+    }
     public Pessoa(String login, String password, String email) {
         this.login = login;
         this.password = password;
