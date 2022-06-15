@@ -15,7 +15,9 @@ public class PessoaService {
     @POST
     @Path("/create")
     @Produces(MediaType.APPLICATION_JSON)
-    public Pessoa pessoa(@FormParam("login") String login, @FormParam("password") String password, @FormParam("email") String email){
+    public Pessoa pessoa(@FormParam("login") String login, 
+                            @FormParam("password") String password, 
+                            @FormParam("email") String email){
         Pessoa pessoa = new Pessoa(login, password, email);
         System.out.println(pessoa.getLogin());
         return pessoa;

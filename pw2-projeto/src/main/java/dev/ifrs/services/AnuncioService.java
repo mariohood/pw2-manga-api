@@ -20,12 +20,8 @@ public class AnuncioService {
     @Path("/create")
     @Produces(MediaType.APPLICATION_JSON)
     public Anuncio anuncio(@FormParam("login") String login, 
-                            @FormParam("manga_id") Long manga_id){
-        Pessoa pessoa = new Pessoa(login);
-        Manga manga = new Manga(manga_id);          
-        Anuncio anuncio = new Anuncio(pessoa, manga);
-        return anuncio;
-        
+                            @FormParam("manga_id") Long manga_id){              
+        return new Anuncio(new Pessoa(login), new Manga(manga_id));        
     }
 
     @GET
