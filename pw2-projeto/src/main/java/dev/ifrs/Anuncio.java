@@ -1,41 +1,25 @@
 package dev.ifrs;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.persistence.Entity;
 
-public class Anuncio {
+import io.quarkus.hibernate.orm.panache.PanacheEntity;
+
+@Entity
+public class Anuncio extends PanacheEntity{
     
-    private Pessoa pessoa;
-    private Manga manga;
-    private List<Comentario> comentarios;
+    
     private String estrelas;
     private String status;
     
+  
+    private String mangas;
     
-
-    public Anuncio(Pessoa pessoa, Manga manga) {
-        this.pessoa = pessoa;
-        this.manga = manga;
+    
+    
+    public Anuncio() {        
         this.status = "Válido";
     }
-    public Pessoa getPessoa() {
-        return pessoa;
-    }
-    public void setPessoa(Pessoa pessoa) {
-        this.pessoa = pessoa;
-    }
-    public Manga getManga() {
-        return manga;
-    }
-    public void setManga(Manga manga) {
-        this.manga = manga;
-    }
-    public List<Comentario> getComentarios() {
-        return comentarios;
-    }
-    public void setComentarios(List<Comentario> comentarios) {
-        this.comentarios = comentarios;
-    }
+    
     public String getEstrelas() {
         return estrelas;
     }
@@ -48,12 +32,14 @@ public class Anuncio {
     public void setStatus(String status) {
         this.status = status;
     }
-    
 
-    public static List<Anuncio> listAll() {
-        List<Anuncio> list = new ArrayList<>();
-        list.add(new Anuncio(new Pessoa("1pessoa_Anuncio"), new Manga(1234L)));
-        list.add(new Anuncio(new Pessoa("2pessoa_Anuncio"), new Manga(1234L)));        
-        return list;
+    public String getMangas() {
+        return mangas;
     }
-}
+
+    public void setMangas(String mangas) {
+        this.mangas = mangas;
+    }
+
+    
+    }

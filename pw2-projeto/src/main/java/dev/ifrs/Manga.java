@@ -1,28 +1,45 @@
 package dev.ifrs;
 
-import java.util.ArrayList;
-import java.util.List;
 
-public class Manga {
-    private Long id;
+import javax.persistence.Entity;
 
-    public Manga(Long id) {
-        this.id = id;
-    }
 
-    public Long getId() {
-        return id;
-    }
+import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public static List<Manga> listAll() {
-        List<Manga> list = new ArrayList<>();
-        list.add(new Manga(1234L));
-        list.add(new Manga(5678L));
-        return list;
-    }
+@Entity
+public class Manga extends PanacheEntity{
     
+    private Long manga_id;
+    private String comentarios;
+    
+    public Manga() {
+        
+    }
+
+
+    public Long getManga_id() {
+        return manga_id;
+    }
+
+
+    public void setManga_id(Long manga_id) {
+        this.manga_id = manga_id;
+    }
+
+
+    public String getComentarios() {
+        return comentarios;
+    }
+
+
+    public void setComentarios(String comentarios) {
+        this.comentarios = comentarios;
+    }
+
+
+
+
+    
+    
+   
 }

@@ -1,41 +1,63 @@
 package dev.ifrs.services;
 
 import java.util.List;
-
+import javax.transaction.Transactional;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-
-import dev.ifrs.Anuncio;
 import dev.ifrs.Comentario;
-import dev.ifrs.Manga;
-import dev.ifrs.Pessoa;
 
-@Path("/coment")
+@Path("/comentario")
+@Transactional
 public class ComentarioService {
 
     @POST
     @Path("/create")
     @Produces(MediaType.APPLICATION_JSON)
-    public Comentario comentario(@FormParam("login") String login, 
-                            @FormParam("manga_id") Long manga_id,
-                            @FormParam("mensagem") String mensagem){
-        
-         //refatorar pois são criados duas pessoas para passar para os argumentos.                    
-        return new Comentario(new Anuncio(new Pessoa(login), 
-                                new Manga(manga_id)), 
-                                new Pessoa(login), mensagem);       
-    }
+  
+    public Comentario comentario(@FormParam("pessoa_id") String pessoa_id,
+    @FormParam("mensagem") String mensagem){
+        Comentario comentario = new Comentario();
+        comentario.setPessoa_id(pessoa_id);
+        comentario.setMensagem(mensagem);
+        comentario.persist();
+        return comentario;       
 
-    
+
+    }
+    /* public Comentario comentario(@FormParam("pessoa_id") Long pessoa_id,
+                                    @FormParam("manga_id") Long manga_id,
+                                    @FormParam("mensagem") String mensagem){
+        Comentario comentario = new Comentario();
+        
+        comentario.setPessoa_id(pessoa_id);
+        comentario.setMensagem(mensagem);
+        comentario.persistAndFlush();
+        Manga manga = Manga.findById(manga_id);
+        if (manga == null)
+        throw new BadRequestException("Manga not found");
+
+        manga.addComent(comentario);
+        manga.persistAndFlush();
+
+        return comentario;       
+    } */
+
     @GET
     @Path("/list")
     @Produces(MediaType.APPLICATION_JSON)
     public List <Comentario> list(){
         return Comentario.listAll();
     }
-
+    
+    @GET
+    @Path("/list/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Comentario list(@PathParam("id") Long id) {
+        return Comentario.findById(id);
+    }
 }
