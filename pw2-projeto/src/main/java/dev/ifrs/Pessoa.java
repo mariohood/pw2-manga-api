@@ -1,9 +1,17 @@
 package dev.ifrs;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class Pessoa {
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+
+import io.quarkus.hibernate.orm.panache.PanacheEntity;
+
+@Entity
+public class Pessoa extends PanacheEntity {
     
     private String login;
     private String password;
@@ -11,17 +19,15 @@ public class Pessoa {
     private String anuncio;
     private boolean admin = false;
 
-
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "pessoa_id")
+    private List<Anuncio> anuncios;
 
     
-    public Pessoa(String login) {
-        this.login = login;
+    public Pessoa() {
+        
     }
-    public Pessoa(String login, String password, String email) {
-        this.login = login;
-        this.password = password;
-        this.email = email;
-    }
+    
     public String getLogin() {
         return login;
     }
@@ -40,12 +46,7 @@ public class Pessoa {
     public void setEmail(String email) {
         this.email = email;
     }
-    public static List<Pessoa> listAll() {
-        List<Pessoa> list = new ArrayList<>();
-        list.add(new Pessoa("1login", "1password", "1@email.com"));
-        list.add(new Pessoa("2login", "2password", "2@email.com"));
-        return list;
-    }
+   
     public String getAnuncio() {
         return anuncio;
     }
@@ -58,7 +59,18 @@ public class Pessoa {
     public void setAdmin(boolean admin) {
         this.admin = admin;
     }
+
+    public List<Anuncio> getAnuncios() {
+        return anuncios;
+    }
+
+    public void setAnuncios(List<Anuncio> anuncios) {
+        this.anuncios = anuncios;
+    }
    
+    public void addAnuncios(Anuncio anuncio) {
+        this.anuncios.add(anuncio);
+    }
 
 
 
