@@ -13,6 +13,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import ifrs.dev.model.Anuncio;
+import ifrs.dev.model.Manga;
 import ifrs.dev.model.Usuario;
 
 @Path("/anuncio")
@@ -22,21 +23,21 @@ public class AnuncioWS {
     @Path("/create")
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
-    public Anuncio create(@FormParam("manga") String manga,
-                            @FormParam("id") Long id,
+    public Anuncio create(@FormParam("manga_id") Long manga_id,
+                            @FormParam("user_id") Long user_id,
                             @FormParam("msgs") String msgs){
         Anuncio anuncio = new Anuncio();
-        anuncio.setManga(manga);
         anuncio.setMsgs(msgs);
+        Manga manga = Manga.findById(manga_id);
+        anuncio.setManga(manga);
         anuncio.persistAndFlush();
                                 
-        Usuario user = Usuario.findById(id);
+        Usuario user = Usuario.findById(user_id);
         if (user == null)
             throw new BadRequestException("User not found");
 
         user.addAnuncios(anuncio);
         user.persistAndFlush();
-
         return anuncio;
     }
 

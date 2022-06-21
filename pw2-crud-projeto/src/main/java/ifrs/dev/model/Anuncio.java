@@ -7,27 +7,27 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
 @Entity
 public class Anuncio extends PanacheEntity {
 
-    private String manga;
+    @OneToOne
+    @JoinColumn(name="anuncio_ID")
+    private Manga manga;
+
     private String aval;
     private String msgs;
+    
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "anuncio_id")
     private List<Mensagem> mensagens;
     
     public Anuncio() {
     }
-    public String getManga() {
-        return manga;
-    }
-    public void setManga(String manga) {
-        this.manga = manga;
-    }
+   
     public String getAval() {
         return aval;
     }
@@ -48,6 +48,14 @@ public class Anuncio extends PanacheEntity {
     }
     public void addMensagem(Mensagem msg){
         this.mensagens.add(msg);
+    }
+
+    public Manga getManga() {
+        return manga;
+    }
+
+    public void setManga(Manga manga) {
+        this.manga = manga;
     }
     
 }
