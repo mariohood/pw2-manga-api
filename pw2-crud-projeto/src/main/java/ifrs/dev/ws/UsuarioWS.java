@@ -3,6 +3,7 @@ package ifrs.dev.ws;
 import java.util.List;
 
 import javax.transaction.Transactional;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -18,6 +19,7 @@ public class UsuarioWS {
 
     @POST
     @Path("/create")
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
     public Usuario create (@FormParam("login") String login,
