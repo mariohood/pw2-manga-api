@@ -4,12 +4,6 @@ pom.xml.tag
 pom.xml.releaseBackup
 pom.xml.versionsBackup
 release.properties
-pw2-manga-api/target/
-pw2-projeto/target/
-bff/target
-bff/.mvn
-jwt/target
-jet/.mvnw
 
 # Eclipse
 .project
@@ -29,6 +23,7 @@ nb-configuration.xml
 # Visual Studio Code
 .vscode
 .factorypath
+.history
 
 # OSX
 .DS_Store
