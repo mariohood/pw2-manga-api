@@ -38,6 +38,7 @@ public class JWT {
         return Jwt.issuer("http://localhost:8080")
             .upn(email)
             .groups(new HashSet<>(Arrays.asList("User", "Admin")))
+            .expiresAt(System.currentTimeMillis() + 360000)
             .claim(Claims.full_name, name)
             .claim(Claims.email, email)
             .sign();
