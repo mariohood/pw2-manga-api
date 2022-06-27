@@ -55,7 +55,7 @@ public class UsuarioBFF {
 
     @GET
     @Path("/list")
-    @PermitAll
+    @RolesAllowed("Admin")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Usuario> listBFF(){
       
