@@ -8,6 +8,7 @@ import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -26,9 +27,9 @@ public class AnuncioWS {
     @Transactional
     public Anuncio create(@FormParam("manga_id") Long manga_id,
                             @FormParam("user_id") Long user_id,
-                            @FormParam("msgs") String msgs){
+                            @FormParam("desc") String desc){
         Anuncio anuncio = new Anuncio();
-        anuncio.setMsgs(msgs);
+        anuncio.setDescricao(desc);
         Manga manga = Manga.findById(manga_id);
         anuncio.setManga(manga);
         anuncio.persistAndFlush();
@@ -62,5 +63,17 @@ public class AnuncioWS {
         System.out.println("entrou  path delet ");
         Anuncio.deleteById(id);
         System.out.println("EXECUTOU delet ");
+    }
+
+    @PUT
+    @Path("/update/{id}")
+    @Transactional
+    @Produces(MediaType.APPLICATION_JSON)
+    public Anuncio update(@PathParam("id") Long id, 
+                            @FormParam("desc") String desc){
+        Anuncio anuncio = Anuncio.findById(id);
+        if (desc != null) anuncio.setDescricao(desc);
+        anuncio.persistAndFlush();
+        return anuncio;                           
     }
 }

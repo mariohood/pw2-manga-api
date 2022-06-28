@@ -8,6 +8,7 @@ public class Usuario {
     private String login;
     private String email;
     private String password;
+    private boolean admin;
     private List<Anuncio> anuncios;
     
     public Usuario(Long id, String login, String email, List<Anuncio> anuncios) {
@@ -47,5 +48,11 @@ public class Usuario {
     }
     public void setPassword(String password) {
         this.password = password;
+    }
+    public boolean isAdmin() {
+        return admin;
+    }
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
     }
 }

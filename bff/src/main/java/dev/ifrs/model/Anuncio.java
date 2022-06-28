@@ -7,14 +7,14 @@ public class Anuncio {
     private Long id;
     private Manga manga;
     private String aval;
-    private String msgs;
+    private String descricao;
     private List<Mensagem> mensagens;
     
-    public Anuncio(Long id, Manga manga, String aval, String msgs, List<Mensagem> mensagens) {
+    public Anuncio(Long id, Manga manga, String aval, String descricao, List<Mensagem> mensagens) {
         this.id = id;
         this.manga = manga;
         this.aval = aval;
-        this.msgs = msgs;
+        this.descricao = descricao;
         this.mensagens = mensagens;
     }
     public Anuncio() {
@@ -37,11 +37,11 @@ public class Anuncio {
     public void setAval(String aval) {
         this.aval = aval;
     }
-    public String getMsgs() {
-        return msgs;
+    public String getDescricao() {
+        return descricao;
     }
-    public void setMsgs(String msgs) {
-        this.msgs = msgs;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
     public List<Mensagem> getMensagens() {
         return mensagens;

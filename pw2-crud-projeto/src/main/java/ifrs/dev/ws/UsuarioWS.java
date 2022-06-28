@@ -3,11 +3,13 @@ package ifrs.dev.ws;
 import java.util.List;
 
 import javax.transaction.Transactional;
+import javax.validation.constraints.Null;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -55,4 +57,31 @@ public class UsuarioWS {
         Usuario.deleteById(id);
         System.out.println("EXECUTOU delet ");
     }
+
+    @PUT
+    @Path("/update/{id}")
+    @Transactional
+    @Produces(MediaType.APPLICATION_JSON)
+    public Usuario update(@PathParam("id") Long id, @FormParam("login") String login,
+                            @FormParam("password") String password,
+                            @FormParam("email") String email){
+        Usuario usuario = Usuario.findById(id);
+        if (email != null) usuario.setEmail(email);
+        if (login != null) usuario.setLogin(login);
+        if (password != null) usuario.setPassword(password);
+        usuario.persistAndFlush();
+        return usuario;                           
+    }
+
+    @PUT
+    @Path("/setAdmin/{id}")
+    @Transactional
+    @Produces(MediaType.APPLICATION_JSON)
+    public Usuario setAdmin(@PathParam("id") Long id){
+        Usuario usuario = Usuario.findById(id);
+        usuario.setAdmin(true);
+        usuario.persistAndFlush();
+        return usuario;
+    }
+
 }

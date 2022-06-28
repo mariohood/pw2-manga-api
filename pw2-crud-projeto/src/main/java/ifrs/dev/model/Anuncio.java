@@ -19,7 +19,7 @@ public class Anuncio extends PanacheEntity {
     private Manga manga;
 
     private String aval;
-    private String msgs;
+    private String descricao;
     
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "anuncio_id")
@@ -34,12 +34,7 @@ public class Anuncio extends PanacheEntity {
     public void setAval(String aval) {
         this.aval = aval;
     }
-    public String getMsgs() {
-        return msgs;
-    }
-    public void setMsgs(String msgs) {
-        this.msgs = msgs;
-    }
+    
     public List<Mensagem> getMensagens() {
         return mensagens;
     }
@@ -56,6 +51,14 @@ public class Anuncio extends PanacheEntity {
 
     public void setManga(Manga manga) {
         this.manga = manga;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
     
 }

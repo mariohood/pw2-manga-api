@@ -4,10 +4,13 @@ import java.util.List;
 
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
+import javax.transaction.Transactional;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -42,5 +45,19 @@ public interface UsuarioBC {
     @Produces(MediaType.APPLICATION_JSON)
     public Usuario getUser (@PathParam("id") Long id);
 
+    @DELETE
+    @Path("/delete/{id}")
+    public void delete(@PathParam("id") Long id);
+
+    @PUT
+    @Path("/update/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Usuario update(@PathParam("id") Long id, @FormParam("login") String login,
+                            @FormParam("password") String password,
+                            @FormParam("email") String email);
+
+    @PUT
+    @Path("/setAdmin/{id}")                 
+    public Usuario setAdmin(@PathParam("id") Long id);
 
 }

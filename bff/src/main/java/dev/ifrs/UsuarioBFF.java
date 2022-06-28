@@ -6,9 +6,11 @@ import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.ws.rs.BadRequestException;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -86,6 +88,31 @@ public class UsuarioBFF {
         
         
     }
+    @DELETE
+    @Path("/delete/{id}")
+    @PermitAll
+    public void delete(@PathParam("id") Long id){
+        System.out.println("BFF DELETE INICIO ");
+        usuariobc.delete(id);
+        System.out.println("BFF DELETE OK ");
 
+    }
+
+    @PUT
+    @Path("/update/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Usuario update(@PathParam("id") Long id, 
+                            @FormParam("login") String login,
+                            @FormParam("password") String password,
+                            @FormParam("email") String email){
+
+        return usuariobc.update(id, login, password, email);
+                            }
+    
+    @PUT
+    @Path("/setAdmin/{id}")                 
+    public Usuario setAdmin(@PathParam("id") Long id){
+        return usuariobc.setAdmin(id);
+    }
     
 }

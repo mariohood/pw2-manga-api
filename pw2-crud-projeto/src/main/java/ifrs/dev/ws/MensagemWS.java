@@ -8,6 +8,7 @@ import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -61,5 +62,17 @@ public class MensagemWS {
         System.out.println("entrou  path delet ");
         Mensagem.deleteById(id);
         System.out.println("EXECUTOU delet ");
+    }
+    //eh necessario ter um update?
+    @PUT
+    @Path("/update/{id}")
+    @Transactional
+    @Produces(MediaType.APPLICATION_JSON)
+    public Mensagem update(@PathParam("id") Long id, 
+                            @FormParam("texto") String texto){
+        Mensagem mensagem = Mensagem.findById(id);
+        if (texto != null) mensagem.setTexto(texto);
+        mensagem.persistAndFlush();
+        return mensagem;                           
     }
 }

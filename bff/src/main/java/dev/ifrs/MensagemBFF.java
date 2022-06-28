@@ -3,9 +3,11 @@ package dev.ifrs;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -45,4 +47,18 @@ public class MensagemBFF {
     public Mensagem getUserBFF(@PathParam("id") Long id){
         return mensagembc.getMsg(id);
     }
+
+    @DELETE
+    @Path("/delete/{id}")
+    public void delete(@PathParam("id") Long id){
+    mensagembc.delete(id);
+    }
+
+    @PUT
+    @Path("/update/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Mensagem update(@PathParam("id") Long id, 
+                             @FormParam("texto") String texto){
+                                return mensagembc.update(id, texto);
+                             }
 }

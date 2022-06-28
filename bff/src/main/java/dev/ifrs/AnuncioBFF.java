@@ -3,9 +3,11 @@ package dev.ifrs;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -28,8 +30,8 @@ public class AnuncioBFF {
     @Produces(MediaType.APPLICATION_JSON)
     public Anuncio createBFF(@FormParam ("manga_id") Long manga_id,
                                 @FormParam("user_id") Long user_id,
-                                @FormParam("msgs") String msgs){
-        return anunciobc.create(manga_id, user_id, msgs);
+                                @FormParam("desc") String desc){
+        return anunciobc.create(manga_id, user_id, desc);
     }
 
     @GET
@@ -45,5 +47,17 @@ public class AnuncioBFF {
     public Anuncio getAnuncioBFF(@PathParam("id") Long id){
         return anunciobc.getAnuncio(id);
     }
+    @DELETE
+    @Path("/delete/{id}")
+    public void delete(@PathParam("id") Long id){
+        anunciobc.delete(id);
+    }
 
+    @PUT
+    @Path("/update/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Anuncio update(@PathParam("id") Long id, 
+                            @FormParam("desc") String desc){
+                                return anunciobc.update(id, desc);
+                            }
 }
