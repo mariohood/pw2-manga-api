@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 import javax.ws.rs.BadRequestException;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -53,5 +54,12 @@ public class MensagemWS {
         return Mensagem.findById(id);
     }
 
-    
+    @DELETE
+    @Path("/delete/{id}")
+    @Transactional
+    public void delete(@PathParam("id") Long id) {
+        System.out.println("entrou  path delet ");
+        Mensagem.deleteById(id);
+        System.out.println("EXECUTOU delet ");
+    }
 }

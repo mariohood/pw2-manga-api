@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -44,5 +45,14 @@ public class UsuarioWS {
     @Produces(MediaType.APPLICATION_JSON)
     public Usuario find(@PathParam("id") Long id){
         return Usuario.findById(id);
+    }
+
+    @DELETE
+    @Path("/delete/{id}")
+    @Transactional
+    public void delete(@PathParam("id") Long id) {
+        System.out.println("entrou  path delet ");
+        Usuario.deleteById(id);
+        System.out.println("EXECUTOU delet ");
     }
 }

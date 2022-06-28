@@ -16,6 +16,8 @@ public class Usuario extends PanacheEntity {
     private String login;
     private String password;
     private String email;
+    private boolean admin;
+    
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private List<Anuncio> anuncios;
@@ -49,6 +51,12 @@ public class Usuario extends PanacheEntity {
     }
     public void addAnuncios(Anuncio anuncio){
         this.anuncios.add(anuncio);
+    }
+    public boolean isAdmin() {
+        return admin;
+    }
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
     }
     
 }
