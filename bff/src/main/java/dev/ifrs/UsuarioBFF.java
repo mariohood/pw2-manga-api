@@ -57,7 +57,7 @@ public class UsuarioBFF {
 
     @GET
     @Path("/list")
-    @RolesAllowed("Admin")
+    @PermitAll
     @Produces(MediaType.APPLICATION_JSON)
     public List<Usuario> listBFF(){
       
@@ -76,11 +76,11 @@ public class UsuarioBFF {
     @PermitAll
     @Produces(MediaType.TEXT_PLAIN)
     public String getUser2BFF(@FormParam("id") Long id, 
-                                @FormParam("login") String login, 
+                                @FormParam("name") String name, 
                                 @FormParam("password") String password){
         
         
-        if (usuariobc.getUser(id).getLogin().equals(login) && usuariobc.getUser(id).getPassword().equals(password)){
+        if (usuariobc.getUser(id).getLogin().equals(name) && usuariobc.getUser(id).getPassword().equals(password)){
             return loginBC.getJWT(usuariobc.getUser(id).getLogin(), usuariobc.getUser(id).getEmail());
         }
 
