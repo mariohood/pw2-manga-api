@@ -10,18 +10,18 @@
           <label>Email</label>
           <input type="text" placeholder="exemplo@email.com" v-model="email">
           <label>Senha</label>
-          <input type="text" placeholder="****" v-model="password">
+          <input type="password" placeholder="****" v-model="password">
 
           <button class="waves-effect waves-light btn-small">Criar<i class="material-icons left">save</i></button>
           <p></p>
-          <button @click="voltar" class="waves-effect waves-light btn-small">Voltar<i class="material-icons left">back</i></button>
+          <button @click="voltar" class="waves-effect waves-light btn-small">Voltar<i class="material-icons left">arrow_back</i></button>
 
       </form>
     </div>
 </template>
 
 <script>
- import User from './services/test'  
+ import User from '../services/test'  
 
   export default{
     name: 'AddUsuario',
@@ -35,7 +35,6 @@
     },
        methods: {
         criar(){
-            
             User.criar(this.login, this.password, this.email).then(resposta => {
             console.log(resposta.data)
             alert("Criado usuario: " + this.login + " com sucesso");

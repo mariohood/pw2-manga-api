@@ -10,11 +10,11 @@
           <label>Email</label>
           <input type="text" placeholder="exemplo@email.com" v-model="email">
           <label>Senha</label>
-          <input type="text" placeholder="****" v-model="password">
+          <input type="password" placeholder="****" v-model="password">
 
           <button class="waves-effect waves-light btn-small">Salvar<i class="material-icons left">save</i></button>
           <p></p>
-          <button @click="voltar" class="waves-effect waves-light btn-small">Voltar<i class="material-icons left">back</i></button>
+          <button @click="voltar" class="waves-effect waves-light btn-small">Voltar<i class="material-icons left">arrow_back</i></button>
 
       </form>
     </div>
@@ -22,9 +22,9 @@
      <table>
        <thead>
           <tr>
-            <th>NOME</th>
-            <th>QTD</th>
-            <th>VALOR</th>
+            <th>Login</th>
+            <th>Email</th>
+            <th>Administrador</th>
             <th>OPÇÕES</th>
           </tr>
         </thead>
@@ -34,7 +34,7 @@
             <td>{{ usuario.email }}</td>
             <td>admin:  {{ usuario.admin }}</td>
             <td>
-              <button @click="editar(usuario)" class="waves-effect btn-small blue darken-1"><i class="material-icons">create</i></button>
+              <button @click="editar(usuario)" class="waves-effect btn-small blue darken-1"><i class="material-icons">edit</i></button>
               <button @click="deletar(usuario)" class="waves-effect btn-small red darken-1"><i class="material-icons">delete_sweep</i></button>
             </td>
 
@@ -46,7 +46,7 @@
 </template>
 
 <script>
- import User from './services/test'  
+ import User from '../services/test'  
 
   export default{
     name: 'EditUsuario',

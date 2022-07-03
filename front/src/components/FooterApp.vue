@@ -1,6 +1,6 @@
 <template>
   <div  id="footer">
-    <p>       App feito por  {{ nome1 }} e {{ nome2}}</p>
+    <p>     ©  App feito por  {{ nome1 }} e {{ nome2 }}</p>
   </div>
 </template>
 
@@ -11,7 +11,7 @@
     name: 'FooterApp',
     data() {
       return {
-        nome1: "Alexandre de Mesquita Fabian",
+        nome1: "Alexandre Fabian",
         nome2: "Mario Ibanez"
       }
     },
@@ -22,10 +22,9 @@
 
 <style scoped>
   #footer {
-    height: 200px;
-    background-color: #222;
-    border-top: 4px solid #111;
-    color: #fcba03;
+    height: 100px;
+    background-color: whitesmoke;
+    color: grey;
     display: inline-flex;
     align-items: center;
     justify-content: center;

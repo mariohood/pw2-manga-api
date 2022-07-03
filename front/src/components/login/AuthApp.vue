@@ -28,10 +28,10 @@
 </template>
 
 <script>
-  import User from './services/test'  
+  import User from '../services/test'  
 
   export default{
-    name: 'HomeAdmin',
+    name: 'AuthApp',
     data() {
       return {
         usuarios: [],
@@ -52,9 +52,25 @@
        mounted(){
 
        User.list().then(resposta => {
-            console.log(resposta)
-            this.usuarios = resposta.data   
+            console.log("MOUNTED"+resposta)
+            this.usuarios = resposta.data
+            console.log("MOUNTED login: " +localStorage.getItem('login'))
+            for(this.usuario of this.usuarios){
+                console.log("MOUNTED usuarios: " + this.usuario.login)
+                if(this.usuario.login == localStorage.getItem('login')){
+                    localStorage.setItem('idLogado', this.usuario.id)
+                    if (this.usuario.admin) {
+                        console.log("usuario "+this.usuario.login+" é admin")
+                        this.$emit('authAdmin')
+                    } else {console.log("usuario "+this.usuario.login+" NAO é admin")
+                        this.$emit('authUser')
+                    }
+                    
+                }
+
+            }
         })
+       
     },
     
   
