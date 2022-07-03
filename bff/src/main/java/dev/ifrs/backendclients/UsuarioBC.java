@@ -21,7 +21,7 @@ import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 import dev.ifrs.model.Usuario;
 import io.quarkus.oidc.token.propagation.AccessToken;
 
-@RegisterRestClient(baseUri = "http://localhost:8080/usuario")
+@RegisterRestClient(baseUri = "http://localhost:8084/usuario")
 public interface UsuarioBC {
 
     @POST

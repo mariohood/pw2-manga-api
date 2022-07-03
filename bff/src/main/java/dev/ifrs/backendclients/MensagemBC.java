@@ -18,7 +18,7 @@ import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 import dev.ifrs.model.Mensagem;
 
 
-@RegisterRestClient(baseUri = "http://localhost:8080/mensagem")
+@RegisterRestClient(baseUri = "http://localhost:8084/mensagem")
 public interface MensagemBC {
 
     @POST

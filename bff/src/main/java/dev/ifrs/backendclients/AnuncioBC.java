@@ -17,7 +17,7 @@ import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 
 import dev.ifrs.model.Anuncio;
 
-@RegisterRestClient(baseUri = "http://localhost:8080/anuncio")
+@RegisterRestClient(baseUri = "http://localhost:8084/anuncio")
 public interface AnuncioBC {
     
     @POST

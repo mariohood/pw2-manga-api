@@ -2,6 +2,7 @@ package dev.ifrs;
 
 import java.util.List;
 
+import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
@@ -27,6 +28,7 @@ public class MensagemBFF {
     
     @POST
     @Path("/create")
+    @RolesAllowed({"Admin", "User"})
     @Produces(MediaType.APPLICATION_JSON)
     public Mensagem createBFF(@FormParam("anuncio_id") Long anuncio_id,
                                 @FormParam("texto") String texto,
@@ -36,6 +38,7 @@ public class MensagemBFF {
 
     @GET
     @Path("/list")
+    @RolesAllowed({"Admin", "User"})
     @Produces(MediaType.APPLICATION_JSON)
     public List<Mensagem> listBFF(){
         return mensagembc.list();
@@ -43,6 +46,7 @@ public class MensagemBFF {
 
     @GET
     @Path("/list/{id}")
+    @RolesAllowed({"Admin", "User"})
     @Produces(MediaType.APPLICATION_JSON)
     public Mensagem getUserBFF(@PathParam("id") Long id){
         return mensagembc.getMsg(id);
@@ -50,12 +54,14 @@ public class MensagemBFF {
 
     @DELETE
     @Path("/delete/{id}")
+    @RolesAllowed({"Admin", "User"})
     public void delete(@PathParam("id") Long id){
     mensagembc.delete(id);
     }
 
     @PUT
     @Path("/update/{id}")
+    @RolesAllowed({"Admin", "User"})
     @Produces(MediaType.APPLICATION_JSON)
     public Mensagem update(@PathParam("id") Long id, 
                              @FormParam("texto") String texto){

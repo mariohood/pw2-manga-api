@@ -17,14 +17,18 @@ import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 
 import dev.ifrs.model.Manga;
 
-@RegisterRestClient(baseUri = "http://localhost:8080/manga")
+@RegisterRestClient(baseUri = "http://localhost:8084/manga")
 public interface MangaBC {
     
     @POST
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @Path("/create")
     @Produces(MediaType.APPLICATION_JSON)
-    public Manga create (@FormParam("mal_id") String mal_id);
+    public Manga create (@FormParam("mal_id") String mal_id,
+                            @FormParam("image_url") String image_url,
+                            @FormParam("title") String title,
+                            @FormParam("url") String url,
+                            @FormParam("chapters") String chapters);
 
     @GET
     @Path("/list")

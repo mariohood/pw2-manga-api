@@ -47,7 +47,7 @@ public class UsuarioBFF {
 
     @POST
     @Path("/create")
-    @PermitAll
+    @RolesAllowed({"Admin"})
     @Produces(MediaType.APPLICATION_JSON)
     public Usuario createBFF(@FormParam("login") String login,
                                 @FormParam("password") String password,
@@ -57,7 +57,7 @@ public class UsuarioBFF {
 
     @GET
     @Path("/list")
-    @PermitAll
+    @RolesAllowed({"Admin", "User"})
     @Produces(MediaType.APPLICATION_JSON)
     public List<Usuario> listBFF(){
       
@@ -66,6 +66,7 @@ public class UsuarioBFF {
 
     @GET
     @Path("/list/{id}")
+    @RolesAllowed({"Admin", "User"})
     @Produces(MediaType.APPLICATION_JSON)
     public Usuario getUserBFF(@PathParam("id") Long id){
         return usuariobc.getUser(id);
@@ -75,22 +76,27 @@ public class UsuarioBFF {
     @Path("/login")
     @PermitAll
     @Produces(MediaType.TEXT_PLAIN)
-    public String getUser2BFF(@FormParam("id") Long id, 
-                                @FormParam("name") String name, 
+    public String getUser2BFF(@FormParam("name") String name, 
                                 @FormParam("password") String password){
         
-        
-        if (usuariobc.getUser(id).getLogin().equals(name) && usuariobc.getUser(id).getPassword().equals(password)){
-            return loginBC.getJWT(usuariobc.getUser(id).getLogin(), usuariobc.getUser(id).getEmail());
+        List <Usuario> users = usuariobc.list();
+        for(Usuario user : users){
+            System.out.println("Lista de usuarios: "+user.getLogin());
+            if(user.getLogin().equals(name) && user.getPassword().equals(password)){
+                if(user.isAdmin()){
+                    System.out.println("usuario admin: "+user.getLogin());
+                return loginBC.getADMIN(user.getLogin(), user.getEmail());
+                } else {
+                    System.out.println("usuario certo: "+user.getLogin());
+                    return loginBC.getJWT(user.getLogin(), user.getEmail());
+            }
+            }
         }
-
         throw new BadRequestException("Usuario e Senha incorretos");
-        
-        
     }
     @DELETE
     @Path("/delete/{id}")
-    @PermitAll
+    @RolesAllowed({"Admin"})
     public void delete(@PathParam("id") Long id){
         System.out.println("BFF DELETE INICIO ");
         usuariobc.delete(id);
@@ -101,6 +107,7 @@ public class UsuarioBFF {
     @PUT
     @Path("/update/{id}")
     @Produces(MediaType.APPLICATION_JSON)
+    @RolesAllowed({"Admin"})
     public Usuario update(@PathParam("id") Long id, 
                             @FormParam("login") String login,
                             @FormParam("password") String password,
@@ -110,7 +117,8 @@ public class UsuarioBFF {
                             }
     
     @PUT
-    @Path("/setAdmin/{id}")                 
+    @Path("/setAdmin/{id}")
+    @RolesAllowed({"Admin"})                
     public Usuario setAdmin(@PathParam("id") Long id){
         return usuariobc.setAdmin(id);
     }
