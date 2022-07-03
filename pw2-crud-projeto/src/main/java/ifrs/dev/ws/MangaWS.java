@@ -22,9 +22,17 @@ public class MangaWS {
     @Path("/create")
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
-    public Manga create(@FormParam("mal_id") String mal_id){
+    public Manga create(@FormParam("mal_id") String mal_id,
+                            @FormParam("image_url") String image_url,
+                            @FormParam("title") String title,
+                            @FormParam("url") String url,
+                            @FormParam("chapters") String chapters){
         Manga manga = new Manga();
         manga.setMal_id(mal_id);
+        manga.setImage_url(image_url);
+        manga.setTitle(title);
+        manga.setUrl(url);
+        manga.setChapters(chapters);
         manga.persist();
         return manga;
     }
