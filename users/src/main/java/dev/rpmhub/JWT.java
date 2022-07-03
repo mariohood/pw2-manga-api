@@ -23,9 +23,10 @@ import org.eclipse.microprofile.jwt.Claims;
 
 import io.smallrye.jwt.build.Jwt;
 
-@Path("/getjwt")
+@Path("/auth")
 public class JWT {
 
+    @Path("/getjwt")
     @POST
     @PermitAll
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
@@ -35,9 +36,28 @@ public class JWT {
          * Uma observação importante, você deve autenticar (usuário e senha)
          * os usuários antes de criar um token.
          */
-        return Jwt.issuer("http://localhost:8080")
+        return Jwt.issuer("http://localhost:8084")
             .upn(email)
-            .groups(new HashSet<>(Arrays.asList("User", "Admin")))
+            .groups(new HashSet<>(Arrays.asList("User")))
+            .expiresAt(System.currentTimeMillis() + 360000)
+            .claim(Claims.full_name, name)
+            .claim(Claims.email, email)
+            .sign();
+    }
+
+    @Path("/getadmin")
+    @POST
+    @PermitAll
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    @Produces(MediaType.TEXT_PLAIN)
+    public String getADMIN(@FormParam("name") String name, @FormParam("email") String email){
+        /**
+         * Uma observação importante, você deve autenticar (usuário e senha)
+         * os usuários antes de criar um token.
+         */
+        return Jwt.issuer("http://localhost:8084")
+            .upn(email)
+            .groups(new HashSet<>(Arrays.asList("Admin")))
             .expiresAt(System.currentTimeMillis() + 360000)
             .claim(Claims.full_name, name)
             .claim(Claims.email, email)
