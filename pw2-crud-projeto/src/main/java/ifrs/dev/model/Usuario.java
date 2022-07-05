@@ -16,16 +16,16 @@ public class Usuario extends PanacheEntity {
     private String login;
     private String password;
     private String email;
-    private boolean admin;
+    private boolean admin; //define se é admin ou user
     
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
-    private List<Anuncio> anuncios;
+    private List<Anuncio> anuncios; // Usuario possui uma lista de anuncios One to Many
 
-
+    //Contrutor e Getters e Setters
     public Usuario() {
     }
-    public String getLogin() {
+    public String getLogin() { 
         return login;
     }
     public void setLogin(String login) {

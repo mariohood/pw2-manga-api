@@ -16,14 +16,14 @@ public class Anuncio extends PanacheEntity {
 
     @OneToOne
     @JoinColumn(name="anuncio_ID")
-    private Manga manga;
+    private Manga manga; //Anuncio possui UM Maná One to One
 
     private String aval;
     private String descricao;
     
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "anuncio_id")
-    private List<Mensagem> mensagens;
+    private List<Mensagem> mensagens; //Anuncio possui uma lista de Mensagens One To Many
     
     public Anuncio() {
     }

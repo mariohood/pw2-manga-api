@@ -47,7 +47,7 @@ public class UsuarioBFF {
 
     @POST
     @Path("/create")
-    @RolesAllowed({"Admin"})
+    @RolesAllowed({"Admin", "User"})
     @Produces(MediaType.APPLICATION_JSON)
     public Usuario createBFF(@FormParam("login") String login,
                                 @FormParam("password") String password,
@@ -107,7 +107,7 @@ public class UsuarioBFF {
     @PUT
     @Path("/update/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    @RolesAllowed({"Admin"})
+    @RolesAllowed({"Admin", "User"})
     public Usuario update(@PathParam("id") Long id, 
                             @FormParam("login") String login,
                             @FormParam("password") String password,

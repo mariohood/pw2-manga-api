@@ -73,7 +73,7 @@ public class UsuarioWS {
         return usuario;                           
     }
 
-    @PUT
+    @PUT //EXCLUSIVO DO USUARIO
     @Path("/setAdmin/{id}")
     @Transactional
     @Produces(MediaType.APPLICATION_JSON)
