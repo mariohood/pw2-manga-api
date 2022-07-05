@@ -5,17 +5,20 @@
         <div>
             <label center>Login</label>
             <input type="text" v-model="name" placeholder="Insira seu login aqui">
-        </div>
-        <div>
+       
             <label>Senha</label>
             <input type="password" v-model="password" placeholder="*********">
+        
+              <input type="submit"  class="waves-effect waves-light btn-large" value="Enviar">
         </div>
-       
-        <div>
-              <input type="submit" value="Enviar">
-        </div>
-        <p v-if="this.estado"> Texto de test esta logado</p>
+        
     </form>
+    
+    
+
+        <button @click="enterCadastrar" class="waves-effect waves-light btn-small">Cadastrar novo usuário<i class="material-icons left">add</i></button>
+
+       
   </div>
 </template>
 
@@ -51,6 +54,9 @@
                 console.log("Autenticado");
                 this.$emit('autenticado');
             })
+        },
+        enterCadastrar(){
+          this.$emit('enterCadastrar')
         }
     }
         
@@ -58,5 +64,10 @@
 </script>
 
 <style scoped>
-
+div {
+  padding-top: 50px;
+  padding-right: 30px;
+  padding-bottom: 50px;
+  padding-left: 30px;
+}
 </style>

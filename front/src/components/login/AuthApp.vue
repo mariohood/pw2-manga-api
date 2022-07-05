@@ -4,9 +4,9 @@
     <table>
        <thead>
           <tr>
-            <th>NOME</th>
-            <th>QTD</th>
-            <th>VALOR</th>
+            <th>Login</th>
+            <th>Email</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>

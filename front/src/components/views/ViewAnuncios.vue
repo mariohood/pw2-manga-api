@@ -1,23 +1,28 @@
 <template>
     <div>
-        <h2>VISUALIZAR ANUNCIOS</h2>
+        <h4>Meus anúncios:</h4>
+        <button @click="voltar" class="waves-effect waves-light btn-small">Voltar<i class="material-icons left">arrow_back</i></button>
     <table>
        <thead>
           <tr>
-            <th>Anuncio</th>
-            <th>Descricao</th>
-            <th>Manga</th>
+            <th>Anúncio</th>
+            <th>Descrição</th>
+            <th>Mangá</th>
             
           </tr>
         </thead>
         <tbody>
           <tr v-for="anuncio of this.anuncios" :key="anuncio.id">
-             <td><img :src="anuncio.manga.image_url" style="height: 100px;">}</td>
+             <td>
+                <table>
+                <img :src="anuncio.manga.image_url" style="height: 100px;" @click="voltar">
+                </table>
+             </td>
             <td>{{anuncio.manga.title}}</td>
-            <td>{{ anuncio.descricao }}</td>
+            <td>{{anuncio.descricao}}</td>
            
            <td>
-              <button @click="viewManga(anuncio.manga.mal_id)" class="waves-effect btn-small blue darken-1"><i class="material-icons">pageview</i></button>
+              <button @click="viewManga(anuncio.id)" class="waves-effect btn-small blue darken-1"><i class="material-icons">pageview</i></button>
             </td>
 
           </tr>
@@ -25,7 +30,8 @@
         </tbody>
       
       </table>
-
+       <h4 v-if="!anuncios.length">Você não possui anúncios cadastrados</h4>
+        <p></p>
         <button @click="voltar" class="waves-effect waves-light btn-small">Voltar<i class="material-icons left">arrow_back</i></button>
 
     </div>

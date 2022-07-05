@@ -1,38 +1,56 @@
 <template>
     <div >
-     <h3>Bem vindo, {{login}}, a sua página Inicial</h3>
-     <h3> {{usuario.id}} {{usuario.login}} {{usuario.password}} {{usuario.email}}</h3>
-     <p>{{usuario.anuncios}}</p>
+     <h3>Bem vindo, {{login}}</h3>
      <table>
-       <thead>
-          <tr>
-            <th>Login</th>
-            <th>Email</th>
-            <th>Password</th>
-            <th>Anúncios</th>
-            <th>Opções</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr >
-            <td>{{ this.usuario.id }}</td>
-            <td>{{ this.usuario.email }}</td>
-            <td>{{ this.usuario.password }}</td>
-            <td>
-              <button @click="listAnuncios()" class="waves-effect btn-small grey darken-1"><i class="material-icons left">find_in_page</i></button>
-            </td>
-            <td>
-                {{ this.usuario.anuncios }}
-            </td>
+      <thead>
+        <tr>
+          <th>Usuário</th>
+          <th>Opções</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+                    <table>
+                      <thead>
+                          <tr>
+                            <th>Login</th>
+                            <th>Email</th>
+                            <th>Anúncios</th>
+                            
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr >
+                            <td>{{ this.usuario.login }}</td>
+                            <td>{{ this.usuario.email }}</td>
+                            <td>
+                              <button @click="listAnuncios()" class="waves-effect btn-small blue darken-1">Ver <i class="material-icons left">find_in_page</i></button> <p>
 
-          </tr>
+                              </p>
+                                    <button @click="adicionar" class="waves-effect waves-light btn-small">Adicionar<i class="material-icons left">save</i></button>
 
-        </tbody>
-      
+                            </td>
+                            
+
+                          </tr>
+
+                        </tbody>
+                      
+                      </table>
+                </td>
+          <td>
+            <p>
+            <button @click="enterEditProfile()" class="waves-effect btn-small grey darken-1">Editar dados do usuário<i class="material-icons left">edit</i></button>
+             </p><p>
+            <button @click="enterChangePassword()" class="waves-effect btn-small grey darken-1">Editar Senha<i class="material-icons left">https</i></button>
+             </p><p>
+</p>
+          </td>
+        </tr>      
+          </tbody>
       </table>
-      <div></div>
-     <button @click="adicionar" class="waves-effect waves-light btn-small">Adicionar Anúncio<i class="material-icons left">save</i></button>
-
+     
     </div>
 </template>
 
@@ -58,7 +76,17 @@ export default {
 
     listAnuncios() {
         console.log("Method Anuncio");
+         localStorage.setItem('idView', this.usuario.id);
+         console.log("USUARIO ID " +this.usuario.id);
         this.$emit('listarAnuncios');
+       },
+       enterEditProfile() {
+        console.log("Method EditProfile");
+        this.$emit('enterEditProfile');
+       },
+    enterChangePassword() {
+        console.log("Method ChangePassword");
+        this.$emit('enterChangePassword');
        },
    },
       

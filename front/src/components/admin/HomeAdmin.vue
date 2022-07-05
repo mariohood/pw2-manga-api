@@ -13,7 +13,8 @@
           <tr v-for="usuario of usuarios" :key="usuario.id">
             <td>{{ usuario.login }}</td>
             <td>{{ usuario.email }}</td>
-            <td>admin:  {{ usuario.admin }}</td>
+            <td v-if="usuario.admin == false" >Não</td>
+            <td v-if="usuario.admin == true" >Sim</td>
            <td>
               <button @click="view(usuario)" class="waves-effect btn-small blue darken-1"><i class="material-icons">pageview</i></button>
             </td>
@@ -23,9 +24,10 @@
         </tbody>
       
       </table>
-     <button @click="adicionar" class="waves-effect waves-light btn-small">Adicionar Usuário<i class="material-icons left">save</i></button>
-
-      <button @click="editar" class="waves-effect waves-light btn-small">Editar Usuário<i class="material-icons left">edit</i></button>
+      <p></p>
+     <button @click="adicionar" class="waves-effect waves-light btn-large">Adicionar Usuário<i class="material-icons left">save</i></button>
+<p></p>
+      <button @click="editar" class="waves-effect waves-light btn-large">Editar Usuário<i class="material-icons left">edit</i></button>
   </div>
 </template>
 

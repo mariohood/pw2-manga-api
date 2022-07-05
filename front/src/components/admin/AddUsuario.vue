@@ -1,9 +1,7 @@
 <template>
 <h2>Criar novo usuário</h2>
     <div class="container">
-        {{ login }}
-        {{ email }}
-        {{ password }}
+      
       <form @submit.prevent="criar">
           <label>Login</label>
           <input type="text" placeholder="Login" v-model="login">
@@ -38,11 +36,11 @@
             User.criar(this.login, this.password, this.email).then(resposta => {
             console.log(resposta.data)
             alert("Criado usuario: " + this.login + " com sucesso");
-            this.$emit('autenticadoAdmin');
+            this.$emit('retorno');
         })
     },
     voltar(){
-            this.$emit('autenticadoAdmin');
+            this.$emit('retorno');
 
     }
     }

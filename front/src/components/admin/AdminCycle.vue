@@ -1,11 +1,11 @@
 <template>
     <div >
         <HomeAdminVue @add-usuario="addUsuario" @edit-usuario="editUsuario" @view-usuario="viewUsuario" v-if="estado == 0"/>
-        <AddUsuarioVue @autenticado-admin="autAdmin" v-if="estado == 2"/>
+        <AddUsuarioVue @retorno="retorno"  v-if="estado == 2"/>
         <EditUsuarioVue @autenticado-admin="autAdmin" v-if="estado == 3"/>
         <ViewUsuarioVue @autenticado-admin="autAdmin" @listar-anuncios="listAnuncios" v-if="estado == 4"/>
         <ViewAnunciosVue @view-usuario="viewUsuario" @view-Manga="viewManga" v-if="estado == 5"/>
-        <ViewMangaVue @listar-anuncios="listAnuncios" v-if="estado == 6" />
+        <ViewMangaVue @list-anuncios="listAnuncios" v-if="estado == 6" />
     </div>
 </template>
 
@@ -47,6 +47,10 @@ export default {
             this.estado = 3
         },
          autAdmin() {
+            console.log("de volta ao AdminCycle")
+            this.estado = 0
+        },
+        retorno() {
             console.log("de volta ao AdminCycle")
             this.estado = 0
         },

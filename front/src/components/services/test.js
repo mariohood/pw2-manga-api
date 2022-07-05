@@ -92,8 +92,27 @@ export default {
         params.append('user_id', localStorage.getItem('idLogado'));
         params.append('desc', desc);
         return http.post('anuncio/create', params, {headers: {Authorization: AUTH_STR}});
+    },
 
+    FindAnunciobyID: (id) => {
+        console.log("localStorage FIND BY ID: "+localStorage.getItem('token'));
+        console.log(id)
+        const USER_TOKEN = localStorage.getItem('token')
+        const AUTH_STR = 'Bearer '.concat(USER_TOKEN)
+        var url = 'anuncio/list/' + id;
+        return http.get(url, {headers: {Authorization: AUTH_STR}})
+    },
 
+    postarMensagem:(anuncio_id, texto) => {
+        console.log("AXIOS: ADD MENSAGEM: "+ anuncio_id + texto);
+        const USER_TOKEN = localStorage.getItem('token');
+        const AUTH_STR = 'Bearer '.concat(USER_TOKEN);
+        const params = new URLSearchParams();
+        params.append('anuncio_id', anuncio_id);
+        params.append('user_id', localStorage.getItem('idLogado'));
+        params.append('texto', texto);
+        return http.post('mensagem/create', params, {headers: {Authorization: AUTH_STR}});
     }
+
 
 }

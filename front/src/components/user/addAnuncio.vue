@@ -39,7 +39,7 @@
       
               </table>
             </div>
-            <div v-if="estado==3"> <h1>ADD MANGA {{mal_id}}</h1>
+            <div v-if="estado==(3||4)"> <h1>ADD MANGA {{mal_id}}</h1>
                 <table>
                 <thead>
                   <tr>
@@ -55,7 +55,6 @@
                   <td>{{ manga.title }}</td>
                   <td>{{ manga.chapters }}</td>
                   <td>
-                    <button @click="addMangaAnuncio(manga)" class="waves-effect btn-small blue darken-1"><i class="material-icons">add</i></button>
                   </td>
                 </tr>
               </tbody>
@@ -63,9 +62,12 @@
               </table>
             
             </div>
-            <button @click="criar" class="waves-effect waves-light btn-small">Criar<i class="material-icons left">save</i></button>
+             <div></div>
+             <p></p>
+            <button @click="criar" class="waves-effect waves-light btn-small">Criar Anúncio<i class="material-icons left">save</i></button>
             <div></div>
-          
+            <h3 v-if="estado==4">Anúncio Criado</h3>
+           <p></p>
             <button @click="voltar" class="waves-effect waves-light btn-small">Voltar<i class="material-icons left">arrow_back</i></button>
 
       </form>
@@ -104,6 +106,8 @@ import Manga from '../services/test'
             console.log("manga resp ID: "+this.id_manga)
             Manga.criarAnuncio(this.desc, this.id_manga).then(resposta => {
               console.log("RESPOSTA ANUNCIO"+resposta)
+              alert("Anúncio criado com sucesso")
+              this.voltar()
           })
           })
           

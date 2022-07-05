@@ -1,5 +1,5 @@
 <template>
-<h2>VISUALIZAR usuário</h2>
+<h3>Dados do usuário {{this.login}}</h3>
     
 
      <table>
@@ -9,26 +9,26 @@
             <th>Email</th>
             <th>Administrador</th>
             <th>Anúncios</th>
-            <th>Opções</th>
           </tr>
         </thead>
         <tbody>
           <tr >
-            <td>{{ this.id }}</td>
-            <td>{{ this.email }}</td>
-            <td>{{ this.admin }}</td>
+            <td>{{ this.login }}</td>
+            <td >{{ this.email }}</td>
+            <td v-if="this.admin == false" >Não</td>
+             <td v-if="this.admin == true" >Sim</td>
             <td>
-              <button @click="listAnuncios()" class="waves-effect btn-small grey darken-1"><i class="material-icons">find_in_page</i></button>
+              <p v-if="!this.anuncios.length" > Não possui</p>
+              <button v-if="this.anuncios.length"  @click="listAnuncios()" class="waves-effect btn-small grey darken-1"><i class="material-icons">find_in_page</i></button>
             </td>
-            <td>
-                {{ this.anuncios }}
-            </td>
+            
 
           </tr>
 
         </tbody>
       
       </table>
+      <p></p>
      <button @click="voltar" class="waves-effect waves-light btn-small">Voltar<i class="material-icons left">arrow_back</i></button>
 
 </template>
