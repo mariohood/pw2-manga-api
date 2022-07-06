@@ -1,32 +1,244 @@
 @startuml
-class Pessoa {
-    long id
-    String name
-    String password
-    String e-mail
 
-    getters()
-    setters()
+
+package "pw2-crud-projet" <<Node>> {
+     package "model"{
+        class "Pessoa " {
+            long id
+            String name
+            String password
+            String e-mail
+
+            getters()
+            setters()
+        }
+
+        class "Anuncio " {
+            manga
+            avaliacao
+            List Mensagens
+            getters()
+            setters()
+        }
+
+        class "Manga " {
+            nome
+            volume
+            autor
+            editora
+            getters()
+            setters()
+
+        }
+
+        class "Mensagem " {
+            user_id
+            texto
+            getters()
+            setters()
+        }
+        "Manga " --> "Anuncio " : " * . 1" 
+        "Anuncio " --> "Pessoa " : " 0 . * "
+        "Mensagem " --> "Anuncio " : " 0 . * "
+    }
+    package "ws" {
+        class PessoaWS {
+        create()
+        get()
+        get(id)
+        update()
+        delete(id)
+        setadmin(id)
+        login()
+        }
+
+    class AnuncioWS {
+        create()
+        get()
+        get(id)
+        update()
+        delete(id)
+        }      
+    class MangaWS {
+        create()
+        get()
+        get(id)
+        update()
+        delete(id)
+        }     
+    class MensagemWS {
+        create()
+        get()
+        get(id)
+        update()
+        delete(id)
+        }       
+    }
+    PessoaWS --> "Pessoa "
+    AnuncioWS --> "Anuncio "
+    MangaWS --> "Manga "
+    MensagemWS --> "Mensagem "
 }
 
-class Auth {
 
-    autenticacao()
+package "bff"  <<Node>> {
+    
+    package " model"{
+        class Pessoa {
+            long id
+            String name
+            String password
+            String e-mail
+
+            getters()
+            setters()
+        }
+
+        class Anuncio {
+            manga
+            avaliacao
+            List Mensagens
+            getters()
+            setters()
+        }
+
+        class Manga {
+            nome
+            volume
+            autor
+            editora
+            getters()
+            setters()
+
+        }
+
+        class Mensagem {
+            user_id
+            texto
+            getters()
+            setters()
+        }
+        Manga --> Anuncio : " * . 1" 
+        Anuncio --> Pessoa : " 0 . * "
+        Mensagem --> Anuncio : " 0 . * "
+    }
+    package "backendclients" {
+        Interface "PessoaBC" {
+            create()
+            get()
+            get(id)
+            update()
+            delete(id)
+            setadmin(id)
+            login()
+        }
+        Interface "AnuncioBC" {
+            create()
+            get()
+            get(id)
+            update()
+            delete(id)
+        }
+        Interface "MangaBC" {
+            create()
+            get()
+            get(id)
+            update()
+            delete(id)
+        }    
+        Interface "MensagemBC" {
+            create()
+            get()
+            get(id)
+            update()
+            delete(id)
+        }    
+        Interface "LoginBC" {
+            getjwt()
+            getadmin()
+        }    
+
+
+    }
+    class PessoaBFF {
+        create()
+        get()
+        get(id)
+        update()
+        delete(id)
+        setadmin(id)
+        login()
+        }
+
+    class AnuncioBFF {
+        create()
+        get()
+        get(id)
+        update()
+        delete(id)
+        }      
+    class MangaBFF {
+        create()
+        get()
+        get(id)
+        update()
+        delete(id)
+        }     
+    class MensagemBFF {
+        create()
+        get()
+        get(id)
+        update()
+        delete(id)
+        }       
+MensagemBFF --> "MensagemBC"
+AnuncioBFF --> "AnuncioBC"
+PessoaBFF --> "PessoaBC"
+MangaBFF --> "MangaBC"
+
 }
+PessoaBFF --> PessoaWS
+AnuncioBFF --> AnuncioWS
+MangaBFF --> MangaWS
+MensagemBFF --> MensagemWS
 
-class Anuncio {
-    manga
-    avaliacao
-    List Mensagens
-    getters() 
+package "auth-user" <<Node>> {
+    class JWT {
+        getjwt()
+        getadmin()
+    }
+    LoginBC --> JWT
 }
-
-class Manga {
-    nome
-    volume
-    autor;
-    editora;
+    
+package "pw2-manga-api" <<Node>>{
+    package "model " {
+        class "Result" {
+            mal_id
+            url
+            title
+            publishing
+            type
+            chapters
+            volumes
+            image_url
+            getters()
+            setters()
+        }
+        class "Response" {
+            request_hash
+            List <results>
+        }
+    }
+    package restclient {
+        Interface "MangaRestClient" {
+            get()
+        }
+    }
+    class Resource {
+        get()
+    }
+    Resource --> MangaRestClient
 }
+MangaBFF --> Resource
 
-Manga --> Anuncio : "* . 1" 
 @enduml
