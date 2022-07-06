@@ -71,6 +71,8 @@ Implementa um back-end for front-end que acessa os demais services. Implementa u
 
 ### front
 Front-end feito em Vue.js para demonstrar as funcionalidades dos services.
+
+### Diagrama de Classes
 ![image](https://user-images.githubusercontent.com/16073346/177653074-244b6cea-d09a-4394-b606-11502b7139a7.png)
 
 
