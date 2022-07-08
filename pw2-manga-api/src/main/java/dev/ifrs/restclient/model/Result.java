@@ -1,7 +1,5 @@
 package dev.ifrs.restclient.model;
 
-import java.util.List;
-
 public class Result {
     private long mal_id;
     private String url;
